@@ -1,5 +1,5 @@
-import * as React from "react"
-
+import * as React from "react";
+import Navigation from "../components/Navigation";
 
 const pageStyles = {
   color: "#F9F7F7",
@@ -21,7 +21,9 @@ const paragraphStyles = {
 const IndexPage = () => {
 
   return (
+    
     <main style={pageStyles} >
+      <Navigation />
       <h1 style={headingStyles} className="px-auto bg-danger">
         Meal Planning App
       </h1>
