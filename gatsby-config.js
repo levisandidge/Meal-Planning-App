@@ -21,32 +21,3 @@ module.exports = {
   ],
   
 };
-
-const path = require('path');
-
-exports.createPages = async ({ graphql, actions }) => {
-  const { createPage } = actions;
-
-  // Fetch all recipes
-  const result = await graphql(`
-    {
-      allSanityRecipes {
-        nodes {
-          _id
-          name
-        }
-      }
-    }
-  `);
-
-  // Create pages for each recipe
-  result.data.allSanityRecipes.nodes.forEach((node) => {
-    createPage({
-      path: `/recipes/${node.name.toLowerCase().replace(/\s+/g, '-')}`, // Generate a URL slug
-      component: path.resolve('./src/pages/recipeTemplate.js'),
-      context: {
-        node: node, 
-      },
-    });
-  });
-};
