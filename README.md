@@ -17,13 +17,14 @@
     # create a new Gatsby site using the minimal starter
     npm init gatsby
     ```
+  note: added 'npm install gatsby-source-sanity' for sa
 
 2.  **Start developing.**
 
     Navigate into your new site’s directory and start it up.
 
     ```shell
-    cd my-gatsby-site/
+    cd meal-planner
     npm run develop
     ```
 
@@ -41,6 +42,14 @@
     - [API Reference](https://www.gatsbyjs.com/docs/api-reference/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
     - [Plugin Library](https://www.gatsbyjs.com/plugins?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
     - [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
+
+## To Access Sanity CMS
+```
+cd meal-planner
+cd Sanity
+npm run dev
+```
+Sanity can be accessed at http://localhost:3333/
 
 ## 🚀 Quick start (Netlify)
 
