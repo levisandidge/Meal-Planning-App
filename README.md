@@ -17,6 +17,7 @@
     # create a new Gatsby site using the minimal starter
     npm init gatsby
     ```
+  note: added 'npm install gatsby-source-sanity' for sa
 
 2.  **Start developing.**
 
