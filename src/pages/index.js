@@ -3,8 +3,6 @@ import { Link } from "gatsby"
 import { Container, Row, Col } from "react-bootstrap"
 
 import Layout from "../components/layout"
-import Seo from "../components/seo"
-import * as styles from "../components/index.module.css"
 
 import heroImage from '../images/heroImage.png'
 import HowItWorksCarousel from "../components/howworkscarousel"
@@ -74,4 +72,4 @@ export default function HomePage() {
   );
 }
 
-export const Head = () => <Seo title="Home" />
+//export const Head = () => <Seo title="Home" />
