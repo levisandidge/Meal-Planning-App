@@ -2,7 +2,7 @@
 import React from 'react';
 import { Carousel, Container, Row, Col } from 'react-bootstrap';
 
-// ADD IMPORTS FOR IMAGES
+// FIX ME: ADD IMPORTS FOR IMAGES
 
 const features = [
   {
