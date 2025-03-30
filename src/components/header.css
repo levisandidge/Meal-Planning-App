@@ -1,0 +1,30 @@
+/* Keep Navbar in place */
+.navbar-fixed {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+  }
+
+  .navbar-fixed .navbar-brand {
+    font-family: Roboto, 'Open Sans', sans-serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .navbar-fixed .nav-link {
+    position: relative;
+    display: inline-block;
+    padding: 0.75rem 1.25rem;
+    margin-right: 1rem;
+    border-radius: 20px;
+    font-size: 1.3rem;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    color: #f9f7f7;
+  }
+  
+  .navbar-fixed .highlight-hover:hover {
+    background-color: #f9f7f7; /* Light background on hover */
+    box-shadow: 0 0 0 4px #abaaaa;
+    color: #3f72af;
+  }

@@ -6,6 +6,7 @@ import Layout from "../components/layout"
 
 import heroImage from '../images/heroImage.png'
 import HowItWorksCarousel from "../components/howworkscarousel"
+import QAaccordion from "../components/QAaccordian"
 
 const links = [
 ]
@@ -42,9 +43,9 @@ export default function HomePage() {
       <Container fluid className="p-5">
         <Row className="align-items-center">
           <Col md={6} className="text-section">
-            <h1 className="mb-4">Plattr</h1>
+            <h1 className="mb-4">PlateItUp</h1>
             <h3 className="mb-4">Plan, Plate, Post, Prosper</h3>     
-            <p className="mb-4">Plan your meals. Keep your recipes. Share with friends. Reach your goals. All with Plattr.</p>
+            <p className="mb-4">Plan your meals. Keep your recipes. Share with friends. Reach your goals. All with PlateItUp.</p>
           </Col>
           <Col md={6}>
             <img src={heroImage} alt="Hero Image" className="hero-image" />
@@ -54,6 +55,8 @@ export default function HomePage() {
     </section>
     {/* How It Works Section */}
     <HowItWorksCarousel />
+    {/* Q&A Section */}
+    <QAaccordion />
     {/* Mission Statement Section */}
     <section className="mission-statement">
       <Container>
