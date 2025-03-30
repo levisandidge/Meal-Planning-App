@@ -11,27 +11,6 @@ import QAaccordion from "../components/QAaccordian"
 const links = [
 ]
 
-const moreLinks = [
-  { text: "Join us on Discord", url: "https://gatsby.dev/discord" },
-  {
-    text: "Products",
-    url: "",
-  },
-  {
-    text: "Contact Us",
-    url: "",
-  },
-  {
-    text: "About Us",
-    url: "",
-  },
-  {
-    text: "API Reference",
-    url: "",
-  },
-  { text: "Issues", url: "https://github.com/gatsbyjs/gatsby/issues" },
-]
-
 const utmParameters = `?utm_source=starter&utm_medium=start-page&utm_campaign=default-starter`
 
 export default function HomePage() {
