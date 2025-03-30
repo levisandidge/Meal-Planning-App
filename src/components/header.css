@@ -6,6 +6,14 @@
     z-index: 9999;
   }
 
+  .navbar-logo {
+    height: 40px;      /* Set a consistent height */
+    width: auto;       /* Preserve aspect ratio */
+    margin: 0;
+    vertical-align: middle;
+    border-radius: 8px;
+  }
+
   .navbar-fixed .navbar-brand {
     font-family: Roboto, 'Open Sans', sans-serif;
     font-size: 1.5rem;

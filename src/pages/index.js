@@ -5,6 +5,7 @@ import { Container, Row, Col } from "react-bootstrap"
 import Layout from "../components/layout"
 
 import heroImage from '../images/heroImage.png'
+import logo from '../images/PlateItUpLogo.png'
 import HowItWorksCarousel from "../components/howworkscarousel"
 import QAaccordion from "../components/QAaccordian"
 
@@ -27,7 +28,7 @@ export default function HomePage() {
             <p className="mb-4">Plan your meals. Keep your recipes. Share with friends. Reach your goals. All with PlateItUp.</p>
           </Col>
           <Col md={6}>
-            <img src={heroImage} alt="Hero Image" className="hero-image" />
+            <img src={logo} alt="Logo" className="hero-image" />
           </Col>
         </Row>
       </Container>

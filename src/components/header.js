@@ -3,11 +3,16 @@ import { Navbar, Nav, Container, Form, FormControl, Button } from "react-bootstr
 import { Link } from "gatsby";
 import "./header.css";
 
+import logo from "../images/PlateItUpLogo.png"
+
 const Header = ({ siteTitle }) => {
   return (
-    <Navbar className="navbar-fixed" bg="dark" variant="dark">
+    <Navbar className="navbar-fixed" bg="dark" variant="dark" expand="lg">
       <Container>
-        <Navbar.Brand as={Link} to="/">{siteTitle}</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
+          <img src={logo} alt="logo" className="navbar-logo"/>
+          <span className="ms-2">{siteTitle}</span>
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           {/*Links for NavBar*/}
