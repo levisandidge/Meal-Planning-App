@@ -12,17 +12,12 @@ const features = [
   },
   {
     title: 'Meal Planning',
-    text: 'Plan your weekly meals and shop smarter with guided suggestions.',
+    text: 'Plan your weekly meals and shop smarter with guided suggestions. And keep track of your daily intake to achieve your health goals.',
     image: 'https://placehold.co/400', 
   },
   {
     title: 'Budgeting',
     text: 'Set and track your grocery budget to save money every month.',
-    image: 'https://placehold.co/400',
-  },
-  {
-    title: 'Calorie Counting',
-    text: 'Keep track of your daily intake to achieve health goals.',
     image: 'https://placehold.co/400',
   },
 ];

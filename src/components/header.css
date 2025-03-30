@@ -13,8 +13,6 @@
   }
   
   .navbar-fixed .nav-link {
-    position: relative;
-    display: inline-block;
     padding: 0.75rem 1.25rem;
     margin-right: 1rem;
     border-radius: 20px;
@@ -23,8 +21,17 @@
     color: #f9f7f7;
   }
   
-  .navbar-fixed .highlight-hover:hover {
+  .navbar-fixed .nav-link.highlight-hover:hover {
     background-color: #f9f7f7; /* Light background on hover */
     box-shadow: 0 0 0 4px #abaaaa;
     color: #3f72af;
   }
+
+  /* FIX ME: For small screens (collapsed navbar) */
+@media (max-width: 991.98px) {
+  .navbar-fixed .nav-link {
+    display: block;
+    margin-right: 0;
+    text-align: center;
+  }
+}
