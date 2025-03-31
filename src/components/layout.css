@@ -236,13 +236,13 @@ pre tt:after {
 
 /* index/HeroSection */
 .hero-section{
-  background-color: #165cde;
+  background-color: #3F72AF;
   width: 100%;
   padding: 3rem 1rem;
 }
 .hero-section .text-section {
   padding: 1rem;
-  color:#e4e9f4;
+  color:#F9F7F7;
 }
 .hero-image {
   border-radius: 80px;
@@ -253,8 +253,8 @@ pre tt:after {
 
 /* index/HowItWorks */
 .how-it-works-carousel {
-  background-color: #0ed9f4f0;
-  color: #012349;
+  background-color: #DBE2EF;
+  color: #0c1f36;
   width: 100%;
   padding: 3rem 1rem;
 }
@@ -262,7 +262,7 @@ pre tt:after {
 /* index/MissionStatement */
 .mission-statement {
   background-color: #232425de;
-  color: #f9f7f7;
+  color: #F9F7F7;
   width: 100%;
   padding: 3rem 1rem;
 }
