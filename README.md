@@ -27,7 +27,7 @@ This project is a responsive web application designed to help users manage their
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 ## Contact
-For any inquiries, please contact [bbch223@uky.ed](mailto:bbch223@uky.edu).
+For any inquiries, please contact [bbch223@uky.edu](mailto:bbch223@uky.edu).
 
 ## Acknowledgements - 
 [Gatsby](https://github.com/gatsbyjs/gatsby) for framework.
