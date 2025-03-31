@@ -8,7 +8,7 @@ const QAaccordion = () => {
             <div className="qa-jumbotron">
                 <h1 class="qa-header text-center">Q&A</h1>
             </div>
-            <Accordion defaultActiveKey="0">
+            <Accordion>
                 <Accordion.Item eventKey="0">
                     <Accordion.Header className="accord-header text-center">Are all features of PlateItUp available for free?</Accordion.Header>
                     <Accordion.Body className="accord-body">
