@@ -1,58 +1,35 @@
-<p align="center">
-  <a href="https://www.gatsbyjs.com/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
 <h1 align="center">
-  Gatsby Minimal Starter
+  PlateItUp
 </h1>
 
-## 🚀 Quick start
+<p align="center">
+  This repository was created develop and deploy the web app PlateItUp which provides services like meal planning, calorie counting, recipe creation and sharing, and budget creation all in one   place.
+</p>
+## Table of Contents
 
-1.  **Create a Gatsby site.**
+- [Overview](#overview)
+- [Features](#features)
+- [License](#license)
 
-    Use the Gatsby CLI to create a new site, specifying the minimal starter.
+## Overview
 
-    ```shell
-    # create a new Gatsby site using the minimal starter
-    npm init gatsby
-    ```
-  note: added 'npm install gatsby-source-sanity' for sa
+This project is a responsive web application designed to help users manage their daily or even weekly means. It features a clean interface, dynamic content updates, and seamless navigation on both desktop and mobile devices.
 
-2.  **Start developing.**
+## Features
 
-    Navigate into your new site’s directory and start it up.
+- Responsive design with a collapsible navbar for small screens
+- Dynamic content loading and interactive elements
+- Easy navigation and clear feature presentation
+- Quick and easy retrieval and storage of recipes using Sanity
+- (COMING SOON) User authentication and profile management
+- (COMING SOON) Integration with external APIs or services
 
-    ```shell
-    cd meal-planner
-    npm run develop
-    ```
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## Contact
+For any inquiries, please contact [bbch223@uky.ed](mailto:bbch223@uky.edu).
 
-3.  **Open the code and start customizing!**
-
-    Your site is now running at http://localhost:8000!
-
-    Edit `src/pages/index.js` to see your site update in real-time!
-
-4.  **Learn more**
-
-    - [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-    - [Tutorials](https://www.gatsbyjs.com/docs/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-    - [Guides](https://www.gatsbyjs.com/docs/how-to/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-    - [API Reference](https://www.gatsbyjs.com/docs/api-reference/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-    - [Plugin Library](https://www.gatsbyjs.com/plugins?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-    - [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-## To Access Sanity CMS
-```
-cd meal-planner
-cd Sanity
-npm run dev
-```
-Sanity can be accessed at http://localhost:3333/
-
-## 🚀 Quick start (Netlify)
-
-Deploy this starter with one click on [Netlify](https://app.netlify.com/signup):
-
-[<img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify" />](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-minimal)
+## Acknowledgements - 
+[Gatsby](https://github.com/gatsbyjs/gatsby) for framework.
+[Sanity](https://github.com/sanity-io/sanity) for backend.
+[React Bootstrap](https://react-bootstrap.github.io/) for the UI components.
