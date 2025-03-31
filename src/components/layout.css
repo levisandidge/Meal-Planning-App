@@ -1,6 +1,6 @@
 :root {
   --border-radius: 4px;
-  --color-text: #e4e9f4;
+  --color-text: #f9f7f7;
   --color-primary: #112d4e;
   --color-code-bg: #3a99a7f0;
   --color-code: #f9f7f7;
@@ -226,14 +226,6 @@ pre tt:after {
   content: none;
 }
 
-/* Keep Navbar in place */
-.navbar-fixed {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 9999;
-}
-
 /* index/HeroSection */
 .hero-section{
   background-color: #3F72AF;
@@ -253,16 +245,58 @@ pre tt:after {
 
 /* index/HowItWorks */
 .how-it-works-carousel {
-  background-color: #DBE2EF;
-  color: #0c1f36;
+  background-color: #dbe2ef;
+  color: #012349;
   width: 100%;
   padding: 3rem 1rem;
 }
 
+/* index/usecasesection */
+.usecasesection {
+  background-color: #112d4e;
+  width: 100%;
+  min-height: 400px;
+  padding: 5px;
+}
+
+.qa-header {
+  font-family: var(--font-sans);
+  color: #112d4e;
+  font-size: 3rem;
+  margin-bottom: 2rem;
+}
+
+.accord-header{
+  font-family: var(--font-sans);
+  font-size: 2rem;
+}
+
+.accord-body {
+  color: #f9f7f7;
+  background-color: #3f72af;
+  font-family: var(--font-serif)
+}
+
+.accordion-button:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
 /* index/MissionStatement */
 .mission-statement {
-  background-color: #232425de;
-  color: #F9F7F7;
+  background-color: #3f72af;
+  color: #f9f7f7;
   width: 100%;
   padding: 3rem 1rem;
 }
+
+/* Color Palette */
+/* f9f7f7 off white */
+/* dbe2ef Light blue */
+/* 3f72af blue */
+/* 112d4e darkblue */

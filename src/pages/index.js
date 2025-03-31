@@ -5,30 +5,12 @@ import { Container, Row, Col } from "react-bootstrap"
 import Layout from "../components/Layout"
 
 import heroImage from '../images/heroImage.png'
+import logo from '../images/PlateItUpLogo.png'
 import HowItWorksCarousel from "../components/howworkscarousel"
+import QAaccordion from "../components/QAaccordian"
+import UseCaseSection from "../components/usecasesection"
 
 const links = [
-]
-
-const moreLinks = [
-  { text: "Join us on Discord", url: "https://gatsby.dev/discord" },
-  {
-    text: "Products",
-    url: "",
-  },
-  {
-    text: "Contact Us",
-    url: "",
-  },
-  {
-    text: "About Us",
-    url: "",
-  },
-  {
-    text: "API Reference",
-    url: "",
-  },
-  { text: "Issues", url: "https://github.com/gatsbyjs/gatsby/issues" },
 ]
 
 const utmParameters = `?utm_source=starter&utm_medium=start-page&utm_campaign=default-starter`
@@ -42,18 +24,26 @@ export default function HomePage() {
       <Container fluid className="p-5">
         <Row className="align-items-center">
           <Col md={6} className="text-section">
-            <h1 className="mb-4">Plattr</h1>
+            <h1 className="mb-4">PlateItUp</h1>
             <h3 className="mb-4">Plan, Plate, Post, Prosper</h3>     
-            <p className="mb-4">Plan your meals. Keep your recipes. Share with friends. Reach your goals. All with Plattr.</p>
+            <p className="mb-4">Plan your meals. Keep your recipes. Share with friends. Reach your goals. All with PlateItUp.</p>
           </Col>
           <Col md={6}>
-            <img src={heroImage} alt="Hero Image" className="hero-image" />
+            <img src={logo} alt="Logo" className="hero-image" />
           </Col>
         </Row>
       </Container>
     </section>
-    {/* How It Works Section */}
+    {/* How It Works/Features Section */}
+    <section className="how-it-works-carousel">
     <HowItWorksCarousel />
+    </section>
+    {/* Use Case Section */}
+    <section className="usecasesection">
+    <UseCaseSection />
+    </section>
+    {/* Q&A Section */}
+    <QAaccordion />
     {/* Mission Statement Section */}
     <section className="mission-statement">
       <Container>
