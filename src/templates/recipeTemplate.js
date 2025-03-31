@@ -1,25 +1,30 @@
 import React from 'react';
 import { graphql } from 'gatsby';
+import Layout from '../components/Layout.js'
+import * as styles from '../styles/template.module.scss'
 
 const RecipePage = ({ data }) => {
   const recipe = data.sanityRecipes;
 
   if (!recipe) {
-    return <div>Recipe not found</div>;
+    return <Layout><div>Recipe not found</div></Layout>;
   };
   return (
-    <div>
-      <h1>{recipe.name}</h1>
+    <Layout>
+    <div className='mr-3'>
+      <h1 className='mt-5 pt-5'>{recipe.name}</h1>
       <ul>
         {recipe.ingredients.map((ingredient, index) => (
           <li key={index}>
-            {ingredient.ingredient} - {ingredient.measurement} - ${ingredient.price}
+            {ingredient.ingredient} - {ingredient.measurement}
+            {ingredient.price ? ` - $${ingredient.price}` : ''}
           </li>
         ))}
       </ul>
-      <p>{recipe.instructions}</p>
+      <p className='mx-2'>{recipe.instructions}</p>
       <p>Source: {recipe.source}</p>
     </div>
+    </Layout>
   );
 };
 
