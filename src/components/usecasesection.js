@@ -3,31 +3,28 @@ import { Container, Row, Col, Form } from 'react-bootstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import './usecasesection.css'
 
-// FIX ADD IMPORTS FOR IMAGES
-{/* 
 import MobileImg from '../images/mobile.png';
 import WebImg from '../images/web.png';
 import PaperImg from '../images/paper.png';
-*/}
 
 const useCases = [
   {
     key: 'mobile',
     title: 'Mobile',
-    text: 'Experience our app on the go with a seamless mobile interface that lets you plan and share recipes quickly.',
-    image: 'https://placehold.co/400',
+    text: 'Plan your meals, post your favorite dishes, and check calorie counts on the go. Whether you’re at the store or in the kitchen, everything you need is right in your pocket.',
+    image: MobileImg,
   },
   {
     key: 'web',
     title: 'Web',
-    text: 'Access our full-featured web platform for an expansive and detailed view of your meal plans and recipes.',
-    image: 'https://placehold.co/400',
-  },
+    text: 'Enjoy a bigger workspace for serious planning. Browse, share, and organize recipes with ease — perfect for meal preppers and multitaskers alike.',
+    image: WebImg,
+  },  
   {
     key: 'paper',
-    title: 'Paper',
-    text: 'Print out recipes in a beautifully designed format—perfect for cooking without screens.',
-    image: 'https://placehold.co/400',
+    title: 'Hard Copy',
+    text: 'Prefer the old-school charm of pen and paper? Print out meal plans, shopping lists, or shareable recipes for the fridge, the binder, or your grandma’s cookbook.',
+    image: PaperImg,
   },
 ];
 
@@ -37,7 +34,7 @@ const UseCaseSection = () => {
 
   return (
     <Container className="my-5">
-      <h2 className="text-center mb-4">Use Cases</h2>
+      <h2 className="text-center mb-4">Flexible by Design</h2>
       
       {/* Button Group for Use Case Selection */}
       <div className="d-flex justify-content-center mb-4">
@@ -89,13 +86,13 @@ const UseCaseSection = () => {
           <img
             src={currentCase.image}
             alt={currentCase.title}
-            className="img-fluid"
+            className="img-fluid usecaseimage"
           />
         </Col>
       {/* Animated Text Column with Transition */}
         <Col md={6}>
           <TransitionGroup>
-            <CSSTransition
+            <CSSTransition  
               key={currentCase.key}
               timeout={500}
               classNames="fade"
