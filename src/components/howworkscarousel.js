@@ -28,7 +28,6 @@ const features = [
 
 const HowItWorksCarousel = () => {
   return (
-    <section className="how-it-works-carousel">
       <Container>
         <h2 className="text-center mb-4">What We Can Provide</h2>
         <Carousel>
@@ -51,7 +50,6 @@ const HowItWorksCarousel = () => {
           ))}
         </Carousel>
       </Container>
-    </section>
   );
 };
 

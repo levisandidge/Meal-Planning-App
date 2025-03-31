@@ -8,6 +8,7 @@ import heroImage from '../images/heroImage.png'
 import logo from '../images/PlateItUpLogo.png'
 import HowItWorksCarousel from "../components/howworkscarousel"
 import QAaccordion from "../components/QAaccordian"
+import UseCaseSection from "../components/usecasesection"
 
 const links = [
 ]
@@ -33,8 +34,14 @@ export default function HomePage() {
         </Row>
       </Container>
     </section>
-    {/* How It Works Section */}
+    {/* How It Works/Features Section */}
+    <section className="how-it-works-carousel">
     <HowItWorksCarousel />
+    </section>
+    {/* Use Case Section */}
+    <section className="usecasesection">
+    <UseCaseSection />
+    </section>
     {/* Q&A Section */}
     <QAaccordion />
     {/* Mission Statement Section */}

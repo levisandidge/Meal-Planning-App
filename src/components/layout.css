@@ -251,6 +251,14 @@ pre tt:after {
   padding: 3rem 1rem;
 }
 
+/* index/usecasesection */
+.usecasesection {
+  background-color: #112d4e;
+  width: 100%;
+  min-height: 400px;
+  padding: 5px;
+}
+
 .qa-header {
   font-family: var(--font-sans);
   color: #112d4e;
