@@ -3,7 +3,7 @@
  */
 module.exports = {
   siteMetadata: {
-    title: `mealPlanner`,
+    title: `PlateItUp`,
     siteUrl: `https://www.yourdomain.tld`
   },
   plugins: ["gatsby-plugin-sass",

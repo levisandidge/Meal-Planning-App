@@ -1,0 +1,19 @@
+/* Remove default padding and margins for lists */ 
+.footer ul {
+    margin: 0;
+    padding-left: 0;
+}
+
+a:link {
+    text-decoration: none;
+    color: #f9f7f7;
+}
+
+.footer-logo {
+    height: 40px;      
+    width: auto;       /* Keeps the aspect ratio */
+    margin: 0;
+    vertical-align: middle;
+    border-radius: 8px;
+  }
+  
