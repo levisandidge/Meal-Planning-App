@@ -28,7 +28,7 @@ const RecipesPage = ({data}) => {
       <div className="mb-4">
         <input
           type="text"
-          placeholder="Search by recipe name..."
+          placeholder="Search by recipe name or ingredient..."
           className="form-control"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
