@@ -18,5 +18,10 @@ export default {
         type: 'number',
         title: 'Price',
       },
+      {
+        name: 'fdcid',
+        type: 'string',
+        title: 'FDC ID',
+      },
     ],
   };
