@@ -1,6 +1,6 @@
 // AddRecipeForm.jsx
 import React from "react";
-import { FormRenderer } from "@sanity/form-toolkit";
+import { FormRenderer } from "@sanity/form-toolkit/form-schema";
 import sanityClient from "@sanity/client";
 
 // Configure the Sanity client (ensure your token has minimal write permissions)
@@ -99,12 +99,12 @@ const AddRecipeForm = () => {
       <h1>Submit Your Recipe</h1>
       <FormRenderer
         schema={recipeFormSchema}
-        initialValue={{}}
+        initialvalue={{}}
         onSubmit={handleSubmit}
         // Optional: custom footer if needed; here we return null.
-        renderFooter={() => null}
+        renderfooter={() => null}
         // Custom renderButton to display a submit button.
-        renderButton={(props) => <button {...props}>Submit Recipe</button>}
+        renderbutton={(props) => <button {...props}>Submit Recipe</button>}
       />
     </div>
   );

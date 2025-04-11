@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@sanity/client": "^6.28.3",
+    "@sanity/form-toolkit": "^2.1.0",
     "bootstrap": "^5.3.3",
     "framer-motion": "^12.6.3",
     "gatsby": "^5.14.1",
@@ -25,6 +26,8 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.9",
     "react-dom": "^18.2.0",
-    "sass": "^1.85.1"
+    "sanity": "^3.84.0",
+    "sass": "^1.85.1",
+    "styled-components": "^6.1.17"
   }
 }
