@@ -17,6 +17,7 @@ export const wrapRootElement = ({ element }) => {
         console.error("Auth0 domain or clientId is not set in environment variables.");
         return element; // or handle the error as needed
     }
+
     return (
         <Auth0Provider
             domain={domain}
