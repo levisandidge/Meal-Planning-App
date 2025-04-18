@@ -2,6 +2,7 @@ import * as React from "react";
 import { Navbar, Nav, Container, Form, FormControl, Button } from "react-bootstrap";
 import { Link } from "gatsby";
 import "./header.css";
+import LoginButton from "./loginbutton";
 
 import logo from "../images/PlateItUpLogo.png"
 
@@ -16,22 +17,14 @@ const Header = ({ siteTitle }) => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           {/*Links for NavBar*/}
-          <Nav>
+          <Nav className='me-auto'>
             <Nav.Link as={Link} to="/" className="highlight-hover nav-link">Home</Nav.Link>
             <Nav.Link as={Link} to="/recipes" className="highlight-hover nav-link">Recipes</Nav.Link>
             <Nav.Link as={Link} to="/meal-plans" className="highlight-hover nav-link">Meal Plans</Nav.Link>
             <Nav.Link as={Link} to="/budget" className="highlight-hover nav-link">Budget</Nav.Link>
           </Nav>
-          {/*Search Bar*/} {/*FIX ME: ADD FUNCTIONALITY AND MAKE IT FLUSH WITH NAVBAR*/}
-          {/*<Form className="d-flex ms-auto">
-            <FormControl
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button variant="outline-success">Search</Button>
-          </Form>*/}
+          {/*Login Button*/}
+          <LoginButton />
         </Navbar.Collapse>
       </Container>
     </Navbar>

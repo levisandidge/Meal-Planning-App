@@ -1,6 +1,8 @@
 const path = require(`path`)
 
-
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`, // this will pick up .env.development when you run `gatsby develop`
+});
 
 exports.onPostBuild = ({ reporter }) => {
   reporter.info(`Your Gatsby site has been built!`)

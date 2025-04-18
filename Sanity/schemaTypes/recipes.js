@@ -4,6 +4,13 @@ export default {
     title: 'Recipes',
     fields: [
         {
+            name: 'userId',
+            title: 'User ID (Auth0 SUB)',
+            type: 'string',
+            readOnly: true
+            // hidden: true
+          },
+        {
             name: 'name',
             type: 'string',
             title: 'Recipe Name'
