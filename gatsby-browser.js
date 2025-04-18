@@ -9,6 +9,8 @@ const onRedirectCallback = (appState) => {
 };
 
 export const wrapRootElement = ({ element }) => {
+    // YOU NEED TO SET THESE ENV VARIABLES IN YOUR .env FILE
+    // GATSBY_AUTH0_DOMAIN and GATSBY_AUTH0_CLIENT_ID
     const domain = process.env.GATSBY_AUTH0_DOMAIN;
     const clientId = process.env.GATSBY_AUTH0_CLIENT_ID;
 
