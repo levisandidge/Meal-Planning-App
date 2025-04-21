@@ -43,7 +43,7 @@ export default async function handler(req, res) {
         let payload;
         try {
             const { payload: verifiedPayload } = await jose.jwtVerify(token, JWKS, {
-                issuer: 'https://${auth0Domain}/',
+                issuer: `https://${auth0Domain}/`,
                 audience: auth0Audience,
             });
             payload = verifiedPayload;

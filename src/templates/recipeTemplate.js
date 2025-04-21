@@ -2,16 +2,29 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import Layout from '../components/Layout.js'
 import * as styles from '../styles/template.module.scss'
+import SaveRecipeButton from '../components/saverecipebutton.js'
 
 const RecipePage = ({ data }) => {
   const recipe = data.sanityRecipes;
 
+  const buttonStyle = {
+    position: 'absolute',
+    top: '8.5rem',
+    right: '3rem',
+  };
+
   if (!recipe) {
     return <Layout><div>Recipe not found</div></Layout>;
   };
+
   return (
     <Layout>
-    <div className='mr-3'>
+    <div className='mr-3 position-relative' style={{ paddingTop: '3rem'}}>
+
+      <div style={buttonStyle}>
+        <SaveRecipeButton recipeId={recipe._id} />
+      </div>
+
       <h1 className='mt-5 pt-5'>{recipe.name}</h1>
       <ul>
         {recipe.ingredients.map((ingredient, index) => (

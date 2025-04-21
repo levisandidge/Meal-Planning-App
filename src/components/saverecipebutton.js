@@ -80,16 +80,16 @@ const SaveRecipeButton = ({ recipeId }) => {
     let buttonVariant = 'primary';
 
     if (isSaving) {
-    buttonText = 'Saving...';
+        buttonText = 'Saving...';
     } else if (saveStatus === 'success') {
-    buttonText = 'Saved!';
-    buttonVariant = 'success';
+        buttonText = 'Saved!';
+        buttonVariant = 'success';
     } else if (saveStatus === 'already_saved') {
-    buttonText = 'Already Saved';
-    buttonVariant = 'info';
+        buttonText = 'Already Saved';
+        buttonVariant = 'info';
     } else if (saveStatus === 'error') {
-    buttonText = 'Error Saving'; // Or revert to 'Save Recipe' after a delay
-    buttonVariant = 'danger';
+        buttonText = 'Error Saving'; // Or revert to 'Save Recipe' after a delay
+        buttonVariant = 'danger';
     }
 
     const isDisabled = isAuthLoading || isSaving;
@@ -101,8 +101,11 @@ const SaveRecipeButton = ({ recipeId }) => {
             onClick={handleSaveClick}
             disabled={isDisabled}
             title={titleText}
+            size = 'lg'
         >
             {buttonText}
         </Button>
     );
 };
+
+export default SaveRecipeButton;
