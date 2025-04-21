@@ -9,3 +9,4 @@ Sanity/dist
 Sanity/.sanity
 Sanity/yarn.lock
 Sanity/package-lock.json
+*.env*
