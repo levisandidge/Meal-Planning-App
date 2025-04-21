@@ -22,6 +22,7 @@ const Header = ({ siteTitle }) => {
             <Nav.Link as={Link} to="/recipes" className="highlight-hover nav-link">Recipes</Nav.Link>
             <Nav.Link as={Link} to="/meal-plans" className="highlight-hover nav-link">Meal Plans</Nav.Link>
             <Nav.Link as={Link} to="/budget" className="highlight-hover nav-link">Budget</Nav.Link>
+            <Nav.Link as={Link} to="/myrecipes" className="highlight-hover nav-link">My Recipes</Nav.Link>
           </Nav>
           {/*Login Button*/}
           <LoginButton />

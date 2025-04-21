@@ -81,7 +81,7 @@ export default async function handler(req, res) {
         const exisitingParams ={ userId, recipeId };
         const existingSave = await sanityClient.fetch(existingQuery, exisitingParams);
 
-        if (exisitingSave) {
+        if (existingSave) {
             console.log('Recipe already exists for user:', userId);
             return res.status(409).json({ error: 'Recipe already saved!' });
             return res.status(200).json({ message: 'Receipe already saved!', savedRecipeId: existingSave._id });

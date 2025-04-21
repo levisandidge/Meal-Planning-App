@@ -8,7 +8,7 @@ const SaveRecipeButton = ({ recipeId }) => {
         isAuthenticated,
         isLoading: isAuthLoading,
         loginWithRedirect,
-        getIdTokenClaims,
+        getAccessTokenSilently,
     } = useAuth0();
 
 
@@ -36,10 +36,13 @@ const SaveRecipeButton = ({ recipeId }) => {
         setIsSaving(true); // disable button while saving
 
         try {
-            const claims = await getIdTokenClaims();
-            const idToken = claims?.__raw; // get raw ID token
-
-            if (!idToken) {
+            console.log("Client Save: Requesting token with audience:", process.env.GATSBY_AUTH0_AUDIENCE);
+            const accessToken = await getAccessTokenSilently({
+                audience: process.env.GATSBY_AUTH0_AUDIENCE,
+                scope: "read:recipes",
+            });
+            console.log("Client Save: Access token obtained:", accessToken);
+            if (!accessToken) {
                 throw new Error("Failed to retrieve ID token.");
             }
 
@@ -47,26 +50,28 @@ const SaveRecipeButton = ({ recipeId }) => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${idToken}`,
+                    'Authorization': `Bearer ${accessToken}`,
                 },
                 body: JSON.stringify({ recipeId: recipeId }),
             });
 
-            const result = await response.json();
-
-            if (!response.ok) {
-                // handle already saved error
-                if (response.status === 409 || result.message === 'Recipe already saved!') {
-                    setSaveStatus('already-saved');
-                    console.log('Recipe already saved by user');
-                } else {
-                    throw new Error(result.error || 'HTTP error status: ${response.status}');
-                }
-            } else {
-                // success
-                setSaveStatus('success');
-                console.log('Save response:', result);
-            }
+            if (response.status === 409) {
+                setSaveStatus('already-saved');
+                console.log('Recipe already saved by user');
+           } else if (!response.ok) {
+                // Try to get error message from response body
+                let errorMsg = `HTTP error status: ${response.status}`;
+                try {
+                   const result = await response.json();
+                   errorMsg = result.error || errorMsg;
+                } catch (e) { /* Ignore if response body is not JSON */ }
+                throw new Error(errorMsg);
+           } else {
+               // Success
+               const result = await response.json(); // Process success response if needed
+               setSaveStatus('success');
+               console.log('Save response:', result);
+           }
         } catch (error) {
             setSaveStatus('error');
             console.error("Error saving recipe:", error);

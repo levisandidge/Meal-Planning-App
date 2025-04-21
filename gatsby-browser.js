@@ -28,7 +28,9 @@ export const wrapRootElement = ({ element }) => {
             domain={domain}
             clientId={clientId}
             authorizationParams={{
+                audience: process.env.GATSBY_AUTH0_AUDIENCE,
                 redirect_uri: typeof window !== 'undefined' ? window.location.origin : '',
+                scope: "openid profile email read:recipes write:recipes read:saved_recipes write:saved_recipes",
             }}
             onRedirectCallback={onRedirectCallback} // Gatsby navigate function
     >
