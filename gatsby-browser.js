@@ -3,6 +3,9 @@ import React from 'react';
 import { navigate } from 'gatsby';
 import { Auth0Provider } from "@auth0/auth0-react";
 
+// Test User: your_email+test1@example.com
+// Pasword: Abc12345
+
 // Callback function is needed for gatsby's routing after login
 const onRedirectCallback = (appState) => {
     navigate(appState?.returnTo || '/', { replace: true });
