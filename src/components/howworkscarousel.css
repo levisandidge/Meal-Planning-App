@@ -9,8 +9,7 @@
 /* Moves the text on the right over to the middle, little hacky but idk what to do*/
 .adjusttext {
     transform: translateX(60px);
-}
-
+  
 /* Move the carousel arrows closer to the edge of the screen */
 .carousel-control-prev,
 .carousel-control-next {
