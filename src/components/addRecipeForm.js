@@ -29,7 +29,7 @@ export default function AddRecipeForm() {
     };
 
     fetch(
-      `https://${process.env.GATSBY_SANITY_PROJECT_ID}.api.sanity.io/v${apiVersion}/data/mutate/production?dryRun=true`,
+      `https://${process.env.SANITY_TOKEN}.api.sanity.io/v2025-3-18/data/mutate/production?dryRun=true`,
       {
         method: "POST",
         headers: {
