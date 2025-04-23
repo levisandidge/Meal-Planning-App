@@ -10,7 +10,7 @@
 .adjusttext {
     transform: translateX(60px);
 }
-  
+
 /* Move the carousel arrows closer to the edge of the screen */
 .carousel-control-prev,
 .carousel-control-next {
