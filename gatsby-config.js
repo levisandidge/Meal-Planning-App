@@ -2,7 +2,7 @@ require("dotenv").config({
   path: `./.env`,
 });
 
-const token = process.env.SANITY_TOKEN;
+const token = process.env.PROJECT_ID;
 
 /**
  * @type {import('gatsby').GatsbyConfig}
