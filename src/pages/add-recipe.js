@@ -1,10 +1,12 @@
+/*
 import React from "react";
 import AddRecipeForm from "../components/addRecipeForm";
 
 const App = () => (
   <div>
-    <AddRecipeForm />
+    //<AddRecipeForm />
   </div>
 );
 
 export default App;
+*/

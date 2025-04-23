@@ -1,113 +1,54 @@
-// AddRecipeForm.jsx
-import React from "react";
-import { FormRenderer } from "@sanity/form-toolkit/form-schema";
-import sanityClient from "@sanity/client";
+// AddRecipeForm.js
 
-// Configure the Sanity client (ensure your token has minimal write permissions)
-const client = sanityClient({
-  projectId: "2ziz6el5", // Replace with your actual project ID
-  dataset: "production", // For example: 'production'
-  token:
-    "skJ8IL4ZNctYstBQ6wCCgXAP9ICJMGNQ5NEryfdiqKa2CBCW11U0TWX1mWBWkyvtpRk3FBNY7e8PabLbsteyfjHvsOGfwaw94oR6NW4P7zCzNp6G5g6kOyPI0NS1HVSZla2EhUtq1S8KRJ42i1lppzyssmKaliefko0AcjBLcDzPoGxMqamo", // Use a token with restricted (create-only) permissions
-  useCdn: false, // Use false for write operations
+import React from "react";
+import { useForm } from "react-hook-form";
+import createClient from "@sanity/client"; // adjust path if needed
+
+
+export const sanity = createClient({
+  projectId: process.env.GATSBY_SANITY_PROJECT_ID, // <‑‑ prefix required in Gatsby
+  dataset: "production",
+  apiVersion: "2024-01-01",
+  token: process.env.GATSBY_SANITY_MUTATION_TOKEN, // write token (dev only)
+  useCdn: false,
 });
 
-// Define the recipe form schema to mirror your Sanity document schema.
-const recipeFormSchema = {
-  title: "Recipe",
-  type: "object",
-  fields: [
-    {
-      name: "name",
-      type: "string",
-      title: "Recipe Name",
-    },
-    {
-      name: "picture",
-      type: "image",
-      title: "Picture",
-    },
-    {
-      name: "ingredients",
-      type: "array",
-      title: "Ingredients",
-      of: [
-        {
-          type: "object",
-          name: "ingredient",
-          title: "Ingredient",
-          fields: [
-            {
-              name: "name",
-              type: "string",
-              title: "Ingredient Name",
-            },
-          ],
-        },
-      ],
-    },
-    {
-      name: "instructions",
-      type: "string",
-      title: "Instructions",
-    },
-    {
-      name: "source",
-      type: "string",
-      title: "Source",
-    },
-  ],
-};
+export default function AddRecipeForm() {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm()
 
-const AddRecipeForm = () => {
-  // The submit handler is called with the form values when the form is submitted.
-  const handleSubmit = async (values) => {
-    try {
-      // If a picture is provided and it is a File or Blob, upload it as an asset.
-      if (
-        values.picture &&
-        (values.picture instanceof File || values.picture instanceof Blob)
-      ) {
-        const asset = await client.assets.upload("image", values.picture);
-        // Replace the picture field with an image reference object as expected by Sanity.
-        values.picture = {
-          _type: "image",
-          asset: {
-            _ref: asset._id,
-            _type: "reference",
-          },
-        };
-      }
 
-      // Create the recipe document in Sanity (ensuring that _type matches your schema)
-      const createdDoc = await client.create({
-        ...values,
-        _type: "recipes",
-      });
+  const onSubmit = (data) => fetch(`https://${projectId}.api.sanity.io/v2021-06-07/data/mutate/${datasetName}?dryRun=true`, {
+    method: 'post',
+    headers: {
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${tokenWithWriteAccess}`
+    },
+    body: JSON.stringify({mutations})
+  })
 
-      alert("Recipe submitted successfully! ID: " + createdDoc._id);
-      return createdDoc;
-    } catch (error) {
-      console.error("Error submitting recipe:", error);
-      alert("Error submitting recipe: " + error.message);
-      throw error;
-    }
-  };
+
+  console.log(watch("example")) // watch input value by passing the name of it
+
 
   return (
-    <div>
-      <h1>Submit Your Recipe</h1>
-      <FormRenderer
-        schema={recipeFormSchema}
-        initialvalue={{}}
-        onSubmit={handleSubmit}
-        // Optional: custom footer if needed; here we return null.
-        renderfooter={() => null}
-        // Custom renderButton to display a submit button.
-        renderbutton={(props) => <button {...props}>Submit Recipe</button>}
-      />
-    </div>
-  );
-};
+    /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
+    <form onSubmit={handleSubmit(onSubmit)}>
+      {/* register your input into the hook by invoking the "register" function */}
+      <input defaultValue="test" {...register("example")} />
 
-export default AddRecipeForm;
+
+      {/* include validation with required or other standard HTML validation rules */}
+      <input {...register("exampleRequired", { required: true })} />
+      {/* errors will return when field validation fails  */}
+      {errors.exampleRequired && <span>This field is required</span>}
+
+
+      <input type="submit" />
+    </form>
+  )
+}
