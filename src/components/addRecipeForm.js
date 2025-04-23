@@ -29,7 +29,7 @@ export default function AddRecipeForm() {
     };
 
     fetch(
-      `https://${process.env.GATSBY_SANITY_PROJECT_ID}.api.sanity.io/v2021-06-07/data/mutate/production?dryRun=true`,
+      `https://${process.env.GATSBY_SANITY_PROJECT_ID}.api.sanity.io/v${apiVersion}/data/mutate/production?dryRun=true`,
       {
         method: "POST",
         headers: {
@@ -69,7 +69,6 @@ export default function AddRecipeForm() {
         <textarea
           id="instructions"
           className="form-textarea"
-          placeholder="Step-by-step cooking directions"
           {...register("instructions")}
         />
       </div>
