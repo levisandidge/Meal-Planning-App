@@ -1,0 +1,60 @@
+.meal-planner-wrapper {
+    padding: 2rem;
+    //max-height: 90vh;
+    //overflow-y: auto;
+  }
+  
+  .planner-title {
+    padding: 2rem;
+    margin-top: 2rem;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  .meal-planner {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    //overflow-x: auto;
+  }
+  
+  .header-row,
+  .day-row {
+    display: grid;
+    grid-template-columns: 150px repeat(3, 1fr); // 1 for day, 3 for meals
+  }
+  
+  .cell {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    min-height: 3rem;
+    text-align: left;
+    overflow: visible; //Added this line
+    white-space: normal; //Added this line
+    word-wrap: break-word; //Added this line
+  }
+  
+  .cell.header {
+    background-color: #f0f0f0;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .cell.meal {
+    border: 1px solid gray;
+    background-color: #fff;
+    cursor: text;
+    min-height: 3rem;
+    height: auto;
+    white-space: pre-wrap;       // allows wrapping at spaces and newlines
+    word-break: break-word;      // breaks long words if needed
+    overflow-wrap: break-word;
+  }
+  
+  .cell.day-name {
+    font-weight: bold;
+    background-color: #f9f9f9;
+    text-align: center;
+  }
+  
+  

@@ -4,7 +4,7 @@
   --color-primary: #112d4e;
   --color-code-bg: #3a99a7f0;
   --color-code: #f9f7f7;
-  --font-sans: -apple-system, Roboto, "sans-serif", "serif";
+  --font-sans: -apple-system, Roboto, "Helvetica Neue","Segoe UI","sans-serif", "serif"; /*Added font for windows system */
   --font-mono: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
     "Courier New", monospace;
   --font-h1: 2.5rem;
