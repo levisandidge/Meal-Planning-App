@@ -29,12 +29,12 @@ export default function AddRecipeForm() {
     };
 
     fetch(
-      `https://${process.env.SANITY_TOKEN}.api.sanity.io/v2025-3-18/data/mutate/production?dryRun=true`,
+      `https://${process.env.PROJECT_ID}.api.sanity.io/v2021-06-07/data/mutate/production?dryRun=true`,
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.GATSBY_SANITY_MUTATION_TOKEN}`,
+          Authorization: `skJ8IL4ZNctYstBQ6wCCgXAP9ICJMGNQ5NEryfdiqKa2CBCW11U0TWX1mWBWkyvtpRk3FBNY7e8PabLbsteyfjHvsOGfwaw94oR6NW4P7zCzNp6G5g6kOyPI0NS1HVSZla2EhUtq1S8KRJ42i1lppzyssmKaliefko0AcjBLcDzPoGxMqamo`,
         },
         body: JSON.stringify({ mutations }),
       },
