@@ -1,11 +1,7 @@
 // AddRecipeForm.js
-
 import React from "react";
 import { useForm } from "react-hook-form";
-
-const projectId = process.env.GATSBY_SANITY_PROJECT_ID;
-const datasetName = "production";
-const token = process.env.GATSBY_SANITY_MUTATION_TOKEN;
+import "./AddRecipeForm.css";
 
 export default function AddRecipeForm() {
   const {
@@ -15,52 +11,82 @@ export default function AddRecipeForm() {
     formState: { errors },
   } = useForm();
 
+  const recipeName = watch("recipeName");
+  const ingredients = watch("ingredients");
+  const instructions = watch("instructions");
+  const author = watch("author");
+
   const onSubmit = (data) => {
     const mutations = {
       create: {
         _type: "document",
-        recipeName: recipeName,
+        recipeName,
         picture: null,
-        ingredients: ingredients,
-        instrucionts: instructions,
+        ingredients,
+        instructions,
         source: author,
       },
     };
 
     fetch(
-      `https://${projectId}.api.sanity.io/v2021-06-07/data/mutate/${datasetName}?dryRun=true`,
+      `https://${process.env.GATSBY_SANITY_PROJECT_ID}.api.sanity.io/v2021-06-07/data/mutate/production?dryRun=true`,
       {
-        method: "post",
+        method: "POST",
         headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${process.env.GATSBY_SANITY_MUTATION_TOKEN}`,
         },
         body: JSON.stringify({ mutations }),
       },
     );
   };
 
-  const recipeName = watch("recipeName"); // watch input value by passing the name of it
-  const ingredients = watch("ingredients");
-  const instructions = watch("instructions");
-  const author = watch("author");
-
   return (
-    /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
-    <form onSubmit={handleSubmit(onSubmit)}>
-      {/* register your input into the hook by invoking the "register" function */}
-      <input {...register("recipeName", { required: true })} />
+    <form className="form" onSubmit={handleSubmit(onSubmit)}>
+      <div className="form-group">
+        <label htmlFor="recipeName">Recipe Name</label>
+        <input
+          id="recipeName"
+          className="form-input"
+          {...register("recipeName", { required: "Recipe name is required" })}
+        />
+        {errors.recipeName && <span>{errors.recipeName.message}</span>}
+      </div>
 
-      {/* include validation with required or other standard HTML validation rules */}
-      <input {...register("ingredients", { required: true })} />
-      {/* errors will return when field validation fails  */}
-      {errors.exampleRequired && <span>This field is required</span>}
+      <div className="form-group">
+        <label htmlFor="ingredients">Ingredients</label>
+        <textarea
+          id="ingredients"
+          className="form-textarea"
+          placeholder="List ingredients, one per line"
+          {...register("ingredients", { required: "Ingredients are required" })}
+        />
+        {errors.ingredients && <span>{errors.ingredients.message}</span>}
+      </div>
 
-      <input {...register("instructions")} />
+      <div className="form-group">
+        <label htmlFor="instructions">Instructions</label>
+        <textarea
+          id="instructions"
+          className="form-textarea"
+          placeholder="Step-by-step cooking directions"
+          {...register("instructions")}
+        />
+      </div>
 
-      <input {...register("author")} />
+      <div className="form-group">
+        <label htmlFor="author">Source / Author</label>
+        <input
+          id="author"
+          className="form-input"
+          placeholder="Your name or source"
+          {...register("author")}
+        />
+      </div>
 
-      <input type="submit" />
+      <button type="submit" className="form-button">
+        Add Recipe
+      </button>
     </form>
   );
 }
