@@ -4,4 +4,4 @@ public
 package-lock.json
 Sanity/
 yarn.lock
-.env
+*.env*

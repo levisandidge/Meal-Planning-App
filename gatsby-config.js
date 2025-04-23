@@ -1,3 +1,9 @@
+require('dotenv').config({
+  path: `./src/.env`
+})
+
+const token = process.env.SANITY_TOKEN
+
 /**
  * @type {import('gatsby').GatsbyConfig}
  */
@@ -10,7 +16,7 @@ module.exports = {
     {
       resolve: 'gatsby-source-sanity',
       options: {
-        projectId: '2ziz6el5', 
+        projectId: token, 
         dataset: 'production',
         graphqlTag: 'default',
         watchMode: true,
