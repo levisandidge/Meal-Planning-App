@@ -1,16 +1,16 @@
 .carousel-img {
-    max-width: 100%;
-    max-height: 350px;
-    border-radius: 50px;
-    object-fit: fill; /* Ensures the entire image is visible without cropping */
-    margin: 0 auto;
-  }
+  max-width: 100%;
+  max-height: 350px;
+  border-radius: 50px;
+  object-fit: fill; /* Ensures the entire image is visible without cropping */
+  margin: 0 auto;
+}
 
 /* Moves the text on the right over to the middle, little hacky but idk what to do*/
 .adjusttext {
-    transform: translateX(60px);
+  transform: translateX(60px);
 }
-  
+
 /* Move the carousel arrows closer to the edge of the screen */
 .carousel-control-prev,
 .carousel-control-next {

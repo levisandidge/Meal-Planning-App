@@ -1,8 +1,8 @@
-require('dotenv').config({
-  path: `.env.development`
-})
+require("dotenv").config({
+  path: `./.env`,
+});
 
-const token = process.env.SANITY_PROJECT_ID
+const token = process.env.PROJECT_ID;
 
 /**
  * @type {import('gatsby').GatsbyConfig}
@@ -10,20 +10,20 @@ const token = process.env.SANITY_PROJECT_ID
 module.exports = {
   siteMetadata: {
     title: `PlateItUp`,
-    siteUrl: `https://www.yourdomain.tld`
+    siteUrl: `https://www.yourdomain.tld`,
   },
-  plugins: ["gatsby-plugin-sass",
+  plugins: [
+    "gatsby-plugin-sass",
     {
-      resolve: 'gatsby-source-sanity',
+      resolve: "gatsby-source-sanity",
       options: {
-        projectId: token, 
-        dataset: 'production',
-        graphqlTag: 'default',
+        projectId: process.env.PROJECT_ID,
+        dataset: "production",
+        graphqlTag: "default",
         watchMode: true,
-        apiVersion: '2025-3-18',
+        apiVersion: "2025-3-18",
       },
     },
     `gatsby-plugin-image`,
   ],
-  
 };

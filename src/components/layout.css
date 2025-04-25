@@ -1,12 +1,16 @@
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
 :root {
   --border-radius: 4px;
   --color-text: #f9f7f7;
   --color-primary: #112d4e;
   --color-code-bg: #3a99a7f0;
   --color-code: #f9f7f7;
-  --font-sans: -apple-system, Roboto, "sans-serif", "serif";
-  --font-mono: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-    "Courier New", monospace;
+  --font-sans:
+    -apple-system, Roboto, "Helvetica Neue", "Segoe UI", "sans-serif", "serif"; /*Added font for windows system */
+  --font-mono:
+    SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+    monospace;
   --font-h1: 2.5rem;
   --font-lg: 18px;
   --font-md: 16px;
@@ -227,14 +231,14 @@ pre tt:after {
 }
 
 /* index/HeroSection */
-.hero-section{
-  background-color: #3F72AF;
+.hero-section {
+  background-color: #3f72af;
   width: 100%;
   padding: 3rem 1rem;
 }
 .hero-section .text-section {
   padding: 1rem;
-  color:#F9F7F7;
+  color: #f9f7f7;
 }
 .hero-image {
   border-radius: 80px;
@@ -266,7 +270,7 @@ pre tt:after {
   margin-bottom: 2rem;
 }
 
-.accord-header{
+.accord-header {
   font-family: var(--font-sans);
   font-size: 2rem;
 }
@@ -274,7 +278,7 @@ pre tt:after {
 .accord-body {
   color: #f9f7f7;
   background-color: #3f72af;
-  font-family: var(--font-serif)
+  font-family: var(--font-serif);
 }
 
 .accordion-button:focus {
@@ -300,3 +304,31 @@ pre tt:after {
 /* dbe2ef Light blue */
 /* 3f72af blue */
 /* 112d4e darkblue */
+
+.floating-btn {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 80px;
+  height: 80px;
+
+  display: flex;
+  align-items: center; /* typo fixed */
+  justify-content: center; /* typo fixed */
+
+  background: #009879;
+  color: #fff;
+  font-size: 40px;
+  text-decoration: none;
+
+  border-radius: 50%; /* typo fixed */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
+
+  transition: background 0.25s;
+  z-index: 1000; /* make sure it floats above everything */
+}
+
+.floating-btn:hover,
+.floating-btn-active {
+  background: #007d63;
+}
