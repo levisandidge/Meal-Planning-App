@@ -1,5 +1,5 @@
 require('dotenv').config({
-  path: `./src/.env`
+  path: `.env.development`
 })
 
 const token = process.env.SANITY_PROJECT_ID
