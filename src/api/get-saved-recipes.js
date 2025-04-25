@@ -4,7 +4,7 @@ import * as jose from 'jose';
 
 // Setup sanity client config
 const sanityClient = createClient({
-    projectId: process.env.SANITY_PROJECT_ID,
+    projectId: process.env.PROJECT_ID,
     dataset: process.env.SANITY_DATASET,
     token: process.env.SANITY_WRITE_TOKEN,
     useCdn: false, // Recommended for serverless functions needing fresh data

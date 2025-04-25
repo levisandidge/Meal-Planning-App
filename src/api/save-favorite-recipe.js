@@ -4,7 +4,7 @@ import * as jose from 'jose';
 // Sanity client config
 // Init sanity client with write permissions
 const sanityClient = createClient({
-    projectId: process.env.SANITY_PROJECT_ID,
+    projectId: process.env.PROJECT_ID,
     dataset: process.env.SANITY_DATASET,
     token: process.env.SANITY_WRITE_TOKEN,
     useCdn: false,
@@ -78,13 +78,16 @@ export default async function handler(req, res) {
 
         // Check if the recipe already exists for the user
         const existingQuery = '*[_type == "savedRecipe" && userId == $userId && recipe._ref == $recipeId]';
-        const exisitingParams ={ userId, recipeId };
-        const existingSave = await sanityClient.fetch(existingQuery, exisitingParams);
+        const existingParams ={ userId, recipeId };
+        const existingSaveArray = await sanityClient.fetch(existingQuery, existingParams);
 
-        if (existingSave) {
-            console.log('Recipe already exists for user:', userId);
-            return res.status(409).json({ error: 'Recipe already saved!' });
-            return res.status(200).json({ message: 'Receipe already saved!', savedRecipeId: existingSave._id });
+        if (existingSaveArray && existingSaveArray.length > 0) {
+            console.log('Recipe already exists for user:', userId, 'Recipe ID:', recipeId);
+            return res.status(409).json({ 
+                message: 'Recipe already saved by user.',
+                savedrecipeId: existingSaveArray[0]._id,
+            });
+            
         }
 
         // Write to sanity
@@ -95,7 +98,7 @@ export default async function handler(req, res) {
         // Return success response
         return res.status(200).json({
             message: 'Recipe saved successfully!',
-            recipeId: createdRecipe._id,
+            recipeId: createdSavedRecipe._id,
         });
 
         

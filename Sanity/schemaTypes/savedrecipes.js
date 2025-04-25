@@ -15,35 +15,11 @@ export default {
             }
         },
         {
-            name: 'recipeId',
-            title: 'Recipe ID',
-            type: 'string'
+            name: 'recipe', 
+            title: 'Recipe Reference',
+            type: 'reference',
+            to: [{ type: 'recipes' }], // Specify it references 'recipes' documents
+            validation: (Rule) => Rule.required(), // Add validation if needed
         },
-        {
-            name: 'name',
-            type: 'string',
-            title: 'Recipe Name'
-        },
-        {
-            name: 'picture',
-            type: 'image',
-            title: 'Picture'
-        },
-        {
-            name: 'ingredients',
-            type: 'array',
-            title: 'Ingredients',
-            of: [{ type: 'ingredient' }], // Use the ingredient type in an array
-        },
-        {
-            name: 'instructions',
-            type: 'string',
-            title: 'Instructions'
-        },
-        {
-            name: 'source',
-            type: 'string',
-            title: 'Source'
-        }
     ]
 }

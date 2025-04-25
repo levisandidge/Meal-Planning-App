@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { graphql } from 'gatsby';
-import Layout from '../components/Layout.js'
+import Layout from '../components/Layout.js';
+import SaveRecipeButton from '../components/saverecipebutton.js';
 import * as styles from '../styles/template.module.scss'
 
 

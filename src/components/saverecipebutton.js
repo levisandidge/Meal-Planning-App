@@ -89,7 +89,7 @@ const SaveRecipeButton = ({ recipeId }) => {
     } else if (saveStatus === 'success') {
         buttonText = 'Saved!';
         buttonVariant = 'success';
-    } else if (saveStatus === 'already_saved') {
+    } else if (saveStatus === 'already-saved') {
         buttonText = 'Already Saved';
         buttonVariant = 'info';
     } else if (saveStatus === 'error') {
