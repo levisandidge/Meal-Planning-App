@@ -95,6 +95,21 @@ export default async function handler(req, res) {
         const createdRecipe = await sanityClient.create(newRecipeDoc);
         console.log('API AddRecipe: Created recipe document:', createdRecipe._id);
         
+        // prepare savedRecipe document
+        const savedRecipeDoc = {
+            _type: 'savedRecipe',
+            userId: userId,
+            recipe: {
+                _type: 'reference',
+                _ref: createdRecipe._id,
+            },
+            savedAt: new Date().toISOString(),
+        };
+
+        console.log('API AddRecipe: Creaeting savedRecipe entry for recipe ID:', createdRecipe._id);
+        const createdSavedEntry = await sanityClient.create(savedRecipeDoc);
+        console.log('API AddRecipe: Created savedRecipe entry:', createdSavedEntry._id);
+
         return res.status(200).json({
             message: 'Recipe added and automatically saved.',
             recipeId: createdRecipe._id,

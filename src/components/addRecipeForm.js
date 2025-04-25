@@ -1,44 +1,85 @@
 // AddRecipeForm.js
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useAuth0 } from "@auth0/auth0-react";
 import "./AddRecipeForm.css";
 
 export default function AddRecipeForm() {
   const {
     register,
     handleSubmit,
-    watch,
+    reset,
     formState: { errors },
   } = useForm();
 
-  const recipeName = watch("recipeName");
-  const ingredients = watch("ingredients");
-  const instructions = watch("instructions");
-  const author = watch("author");
+  // Auth0 hook
+  const {
+    user,
+    isAuthenticated,
+    isLoading: isAuthLoading,
+    loginWithRedirect,
+    getAccessTokenSilently,
+  } = useAuth0();
 
-  const onSubmit = (data) => {
-    const mutations = {
-      create: {
-        _type: "document",
-        recipeName,
-        picture: null,
-        ingredients,
-        instructions,
-        source: author,
-      },
-    };
+  // state for loading and feedback
+  const[isSubmitting, setIsSubmitting] = useState(false);
+  const[submitStatus, setSubmitStatus] = useState({ message: '', type: '' }); // type: success or error
 
-    fetch(
-      `https://${process.env.PROJECT_ID}.api.sanity.io/v2021-06-07/data/mutate/production?dryRun=true`,
-      {
+  // REMOVED OLD WATCHED VALUES, NOT NEEDED ANYMORE
+
+  const onSubmit = async (data) => {
+    // set submitting state
+    setIsSubmitting(true);
+    setSubmitStatus({ message: '', type: '' }); // clear previous status
+
+    // Check if user is authenticated
+    if (!isAuthenticated) {
+      alert("Please log in to add a recipe.");
+      loginWithRedirect({ appState: { returnTo: window.location.pathname } }); // trigger login
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      // get Auth0 token
+      const accessToken = await getAccessTokenSilently({
+        audience: process.env.GATSBY_AUTH0_AUDIENCE,
+      });
+
+      const recipePayload = {
+        name: data.recipeName,
+        ingredients: data.ingredients,
+        instructions: data.instructions,
+        source: data.author,
+      };
+      // REPLACED OLD FETCH CALL WITH BACKEND API (add-user-recipe.js)
+      const response = await fetch('/api/add-user-recipe', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `skJ8IL4ZNctYstBQ6wCCgXAP9ICJMGNQ5NEryfdiqKa2CBCW11U0TWX1mWBWkyvtpRk3FBNY7e8PabLbsteyfjHvsOGfwaw94oR6NW4P7zCzNp6G5g6kOyPI0NS1HVSZla2EhUtq1S8KRJ42i1lppzyssmKaliefko0AcjBLcDzPoGxMqamo`,
+          Authorization: `Bearer ${accessToken}`,
         },
-        body: JSON.stringify({ mutations }),
-      },
-    );
+        body: JSON.stringify(recipePayload),
+      });
+      
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to add recipe (${response.status})');
+      }
+
+      // SUCCESS
+      console.log('Recipe added via API:', result);
+      setSubmitStatus({ message: 'Recipe added successfully!', type: 'success' });
+      reset(); // reset form fields
+    } catch (error) {
+      console.error('Error adding recipe:', error);
+      setSubmitStatus({ message: 'Failed to add recipe. Please try again.', type: 'error' });
+    } finally {
+      setIsSubmitting(false); // renable button
+    }
+    // REMOVED OLD MUTATION CODE, NOT NEEDED ANYMORE
+    // REMOVED FETCH CALL TO SANITY, NOT NEEDED ANYMORE
   };
 
   return (
@@ -49,6 +90,7 @@ export default function AddRecipeForm() {
           id="recipeName"
           className="form-input"
           {...register("recipeName", { required: "Recipe name is required" })}
+          disabled={isSubmitting} // disable input while submitting
         />
         {errors.recipeName && <span>{errors.recipeName.message}</span>}
       </div>
@@ -60,6 +102,7 @@ export default function AddRecipeForm() {
           className="form-textarea"
           placeholder="List ingredients, one per line"
           {...register("ingredients", { required: "Ingredients are required" })}
+          disabled={isSubmitting} // disable input while submitting
         />
         {errors.ingredients && <span>{errors.ingredients.message}</span>}
       </div>
@@ -70,6 +113,7 @@ export default function AddRecipeForm() {
           id="instructions"
           className="form-textarea"
           {...register("instructions")}
+          disabled={isSubmitting} // disable input while submitting
         />
       </div>
 
@@ -80,12 +124,31 @@ export default function AddRecipeForm() {
           className="form-input"
           placeholder="Your name or source"
           {...register("author")}
+          disabled={isSubmitting} // disable input while submitting
         />
       </div>
+      <div className="form-group">
+        <button
+          type = "submit"
+          className="form-button"
+          disabled={isAuthLoading || isSubmitting} // disable button while loading or submitting
+        >
+          {isSubmitting ? "Adding Recipe..." : "Add Recipe"}
+        </button>
+      </div>
 
-      <button type="submit" className="form-button">
-        Add Recipe
-      </button>
+      {/* Display feedback message */}
+      {submitStatus.message && (
+        <p className={'feedback-message ${submitStatus.type}'}>
+          {submitStatus.message}
+        </p>
+      )}
+      {/* Display Auth0 login prompt if not authenticated */}
+      {!isAuthLoading && !isAuthenticated && (
+        <p className="login-prompt">
+          Please <button type="button" onClick={() => loginWithRedirect()} className="link-button">log in</button> to add a recipe.
+        </p>
+      )}
     </form>
   );
 }

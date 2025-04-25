@@ -56,3 +56,22 @@
 .form-button:hover {
   background: #005bb5;
 }
+
+.error-message {
+  color: red; font-size: 0.9em;
+}
+.feedback-message {
+  margin-top: 1em; padding: 0.5em; border-radius: 4px;
+}
+.feedback-message.success {
+  color: green; background-color: #e6ffed; border: 1px solid green;
+}
+.feedback-message.error {
+  color: red; background-color: #ffe6e6; border: 1px solid red;
+}
+.login-prompt {
+  margin-top: 1em; color: #555;
+}
+.link-button {
+  background: none; border: none; color: blue; text-decoration: underline; cursor: pointer; padding: 0;
+}
