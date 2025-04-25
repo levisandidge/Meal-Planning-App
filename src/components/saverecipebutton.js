@@ -14,7 +14,11 @@ const SaveRecipeButton = ({ recipeId }) => {
 
     // State to manage the button's saving process
     const [isSaving, setIsSaving] = useState(false);
-    const [saveStatus, setSaveStatus] = useState(null);
+    const [isRemoving, setIsRemoving] = useState(false);
+    const [status, setStatus] = useState(null);
+    const [savedEntryId, setSavedEntryId] = useState(null); // stores the ID of the saved entry
+    const [errorMessage, setErrorMessage] = useState('');
+
 
     // Ensure recipeId is valid
     if(!recipeId) {
@@ -23,17 +27,15 @@ const SaveRecipeButton = ({ recipeId }) => {
     }
 
     const handleSaveClick = async () => {
-        setSaveStatus(null); // reset on click
+        setStatus(null); // reset on click
+        setErrorMessage(''); // reset error message
+        setIsSaving(true); // disable button while saving
 
         if (!isAuthenticated) {
-            const confirmLogin = window.confirm("You need to log in to save recipes. Do you want to log in?");
-            if (confirmLogin) {
-                loginWithRedirect({ appState: { returnTo: window.location.pathname } });
-            }
+            loginWithRedirect({ appState: { returnTo: window.location.pathname } });
+            setIsSaving(false);
             return;
         }
-
-        setIsSaving(true); // disable button while saving
 
         try {
             console.log("Client Save: Requesting token with audience:", process.env.GATSBY_AUTH0_AUDIENCE);
@@ -55,61 +57,124 @@ const SaveRecipeButton = ({ recipeId }) => {
                 body: JSON.stringify({ recipeId: recipeId }),
             });
 
-            if (response.status === 409) {
-                setSaveStatus('already-saved');
-                console.log('Recipe already saved by user');
-           } else if (!response.ok) {
-                // Try to get error message from response body
-                let errorMsg = `HTTP error status: ${response.status}`;
-                try {
-                   const result = await response.json();
-                   errorMsg = result.error || errorMsg;
-                } catch (e) { /* Ignore if response body is not JSON */ }
-                throw new Error(errorMsg);
-           } else {
-               // Success
-               const result = await response.json(); // Process success response if needed
-               setSaveStatus('success');
-               console.log('Save response:', result);
-           }
+            const result = await response.json();
+            
+            const receivedSavedId = result?.savedrecipeId;
+
+            console.log('API Save Response:', result);
+            if (response.ok) { // Status 200 OK
+                setStatus('saved');
+                setSavedEntryId(receivedSavedId); // Store the ID returned by the API
+                console.log('Save successful:', result);
+            } else if (response.status === 409) { // already saved
+                setStatus('saved'); // Treat as saved
+                setSavedEntryId(receivedSavedId); // Store the ID returned by the API
+                console.log('Recipe was already saved:', result);
+            } else { // Other errors
+                throw new Error(result.error || `HTTP error ${response.status}`);
+            }
         } catch (error) {
-            setSaveStatus('error');
+            setStatus('error');
             console.error("Error saving recipe:", error);
+            setErrorMessage(error.message || 'Failed to save recipe.');
         } finally {
             setIsSaving(false); // re-enable button after saving
         }
     };
 
-    // Determine button text based on state
-    let buttonText = 'Save Recipe';
-    let buttonVariant = 'primary';
+    const handleRemoveClick = async () => {
+        setStatus(null); // Reset status
+        setErrorMessage('');
+        setIsRemoving(true); // Indicate removal in progress
 
-    if (isSaving) {
-        buttonText = 'Saving...';
-    } else if (saveStatus === 'success') {
-        buttonText = 'Saved!';
-        buttonVariant = 'success';
-    } else if (saveStatus === 'already-saved') {
-        buttonText = 'Already Saved';
-        buttonVariant = 'info';
-    } else if (saveStatus === 'error') {
-        buttonText = 'Error Saving'; // Or revert to 'Save Recipe' after a delay
-        buttonVariant = 'danger';
+        console.log('handleRemoveClick triggered. isAuthenticated:', isAuthenticated, 'savedEntryId:', savedEntryId);
+        if (!isAuthenticated || !savedEntryId) {
+            console.error("Cannot remove: Not authenticated or missing savedEntryId.");
+            setIsRemoving(false);
+            return;
+        }
+
+        try {
+            const accessToken = await getAccessTokenSilently({
+                audience: process.env.GATSBY_AUTH0_AUDIENCE,
+            });
+
+            const response = await fetch('/api/remove-favorite-recipe', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${accessToken}`,
+                },
+                // Send the ID of the 'savedRecipe' document to be deleted
+                body: JSON.stringify({ savedRecipeId: savedEntryId }), 
+            });
+
+             // Check response status
+            if (response.ok || response.status === 204) { // Handle 200 OK or 204 No Content
+                 setStatus(null); // Reset to initial state
+                 setSavedEntryId(null); // Clear the saved ID
+                 console.log('Remove successful');
+             } else {
+                 const result = await response.json(); // Try to get error from body
+                 throw new Error(result.error || `HTTP error ${response.status}`);
+             }
+
+        } catch (error) {
+            console.error("Error removing recipe:", error);
+            setStatus('error');
+            setErrorMessage(error.message || 'Failed to remove recipe.');
+        } finally {
+            setIsRemoving(false);
+        }
+    };
+
+    // Determine button text based on state
+    let buttonToRender;
+
+    if (isAuthLoading) {
+        buttonToRender = <Button variant="secondary" disabled size="lg">Loading...</Button>;
+    } else if (status === 'saved') {
+        buttonToRender = (
+            <Button
+                variant="danger"
+                onClick={handleRemoveClick}
+                disabled={isRemoving}
+                title="Remove this recipe from your saved list"
+                size="lg"
+            >
+                {isRemoving ? 'Removing...' : 'Remove Recipe'}
+            </Button>
+        )
+    } else {
+        let saveButtonText = 'Save Recipe';
+        let saveButtonVariant = 'primary';
+        let saveButtonDisabled = isSaving;
+
+        if (isSaving) {
+            saveButtonText = 'Saving...';
+        } else if (status === 'error') {
+            saveButtonText = 'Error Saving';
+            saveButtonVariant = 'warning';
+        }
+
+        buttonToRender = (
+            <Button
+                variant={saveButtonVariant}
+                onClick={handleSaveClick}
+                disabled={saveButtonDisabled || !isAuthenticated}
+                title={!isAuthenticated ? "Log in to save recipes" : "Save this Recipe"}
+                size="lg"
+            >
+                {saveButtonText}
+            </Button>
+        );
     }
 
-    const isDisabled = isAuthLoading || isSaving;
-    const titleText = !isAuthenticated ? "Log in to save recipes" : (isSaving ? "Saving in progress" : "Save this Recipe");
-
     return (
-        <Button
-            variant={buttonVariant}
-            onClick={handleSaveClick}
-            disabled={isDisabled}
-            title={titleText}
-            size = 'lg'
-        >
-            {buttonText}
-        </Button>
+        <div>
+            {buttonToRender}
+            {status === 'error' && <p className="text-danger mt-2">{errorMessage}</p>}
+        </div>
     );
 };
 
