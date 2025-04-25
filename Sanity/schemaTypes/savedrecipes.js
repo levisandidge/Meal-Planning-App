@@ -21,5 +21,12 @@ export default {
             to: [{ type: 'recipes' }], // Specify it references 'recipes' documents
             validation: (Rule) => Rule.required(), // Add validation if needed
         },
+        {
+            name: 'savedAt',
+            title: 'Saved At',
+            type: 'datetime',
+            readOnly: true,
+            hidden: true,
+        }
     ]
 }

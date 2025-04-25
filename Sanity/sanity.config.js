@@ -8,8 +8,8 @@ export default defineConfig({
   name: 'default',
   title: 'MealPlanner',
 
-  projectId: process.env.PROJECT_ID,
-  dataset: process.env.SANITY_DATASET,
+  projectId: process.env.SANITY_STUDIO_PROJECT_ID,
+  dataset: process.env.SANITY_STUDIO_DATASET,
 
   plugins: [structureTool(), visionTool(), formSchema()],
 

@@ -20,6 +20,7 @@
     "@sanity/form-toolkit": "^2.1.0",
     "bootstrap": "^5.3.5",
     "dotenv": "^16.5.0",
+    "formidable": "^3.5.4",
     "framer-motion": "^12.6.3",
     "gatsby": "^5.14.3",
     "gatsby-plugin-image": "^3.14.0",

@@ -46,20 +46,24 @@ export default function AddRecipeForm() {
         audience: process.env.GATSBY_AUTH0_AUDIENCE,
       });
 
-      const recipePayload = {
-        name: data.recipeName,
-        ingredients: data.ingredients,
-        instructions: data.instructions,
-        source: data.author,
-      };
+      // UTILIZE FormData INSTEAD OF JSON
+      const formData = new FormData();
+      formData.append('name', data.recipeName);
+      formData.append('ingredients', data.ingredients);
+      formData.append('instructions', data.instructions);
+      formData.append('source', data.author);
+
+      if (data.picture && data.picture.length > 0) {
+        formData.append('picture', data.picture[0]); // Assuming picture is a file input
+
+      }
       // REPLACED OLD FETCH CALL WITH BACKEND API (add-user-recipe.js)
       const response = await fetch('/api/add-user-recipe', {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
         },
-        body: JSON.stringify(recipePayload),
+        body: formData, // SENDING FORMDATA INSTEAD OF JSON
       });
       
       const result = await response.json();
@@ -127,6 +131,20 @@ export default function AddRecipeForm() {
           disabled={isSubmitting} // disable input while submitting
         />
       </div>
+
+      <div className="form-group">
+        <label htmlFor="picture">Recipe Picture</label>
+        <input
+          id="picture"
+          type="file"
+          className="form-input"
+          accept="image/*"
+          {...register("picture")}
+          disabled={isSubmitting} // disable input while submitting
+        />
+        {errors.picture && <span>{errors.picture.message}</span>}
+      </div>
+
       <div className="form-group">
         <button
           type = "submit"

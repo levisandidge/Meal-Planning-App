@@ -7,12 +7,12 @@ import * as styles from '../styles/template.module.scss'
 
 const convertToGrams = (measurement) => {
   // Simple example: extract number if measurement ends with 'g'
-  const match = measurement.match(/([\d.]+)\s*g/i);
-  if (match) {
-    return parseFloat(match[1]);
+  // bail out unless it's a non-empty string
+  if (typeof measurement !== 'string' || measurement.trim() === '') {
+    return null
   }
-  // TODO: Add more conversion logic for cups, tbsp, etc.
-  return null; // or default weight
+  const match = measurement.match(/([\d.]+)\s*g$/i)
+  return match ? parseFloat(match[1]) : null
 };
 
 const RecipePage = ({ data, pageContext }) => {
