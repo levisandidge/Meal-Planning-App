@@ -21,7 +21,7 @@ This project is a responsive web application designed to help users manage their
 - Dynamic content loading and interactive elements
 - Easy navigation and clear feature presentation
 - Quick and easy retrieval and storage of recipes using Sanity
-- (COMING SOON) User authentication and profile management
+- User authentication and profile management
 - (COMING SOON) Integration with external APIs or services
 
 ## License
