@@ -1,17 +1,18 @@
 import React, {useState, useEffect} from 'react';
 import { graphql } from 'gatsby';
-import Layout from '../components/Layout.js'
+import Layout from '../components/Layout.js';
+import SaveRecipeButton from '../components/saverecipebutton.js';
 import * as styles from '../styles/template.module.scss'
 
 
 const convertToGrams = (measurement) => {
   // Simple example: extract number if measurement ends with 'g'
-  const match = measurement.match(/([\d.]+)\s*g/i);
-  if (match) {
-    return parseFloat(match[1]);
+  // bail out unless it's a non-empty string
+  if (typeof measurement !== 'string' || measurement.trim() === '') {
+    return null
   }
-  // TODO: Add more conversion logic for cups, tbsp, etc.
-  return null; // or default weight
+  const match = measurement.match(/([\d.]+)\s*g$/i)
+  return match ? parseFloat(match[1]) : null
 };
 
 const RecipePage = ({ data, pageContext }) => {
@@ -60,14 +61,26 @@ const RecipePage = ({ data, pageContext }) => {
     setDataNotFound(!foundData);
   }, [recipe, nutrientsData]);
 
+  const buttonStyle = {
+    position: 'absolute',
+    top: '8.5rem',
+    right: '3rem',
+  };
+
   if (!recipe) {
     return <Layout><div>Recipe not found</div></Layout>;
   };
 
 
+
   return (
     <Layout>
-    <div className='mr-3'>
+    <div className='mr-3 position-relative' style={{ paddingTop: '3rem'}}>
+
+      <div style={buttonStyle}>
+        <SaveRecipeButton recipeId={recipe._id} />
+      </div>
+
       <h1 className='mt-5 pt-5'>{recipe.name}</h1>
       <ul>
         {recipe.ingredients.map((ingredient, index) => (

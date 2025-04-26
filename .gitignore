@@ -2,6 +2,11 @@ node_modules/
 .cache/
 public
 package-lock.json
-Sanity/
 yarn.lock
+.env.development
+Sanity/node_modules
+Sanity/dist
+Sanity/.sanity
+Sanity/yarn.lock
+Sanity/package-lock.json
 *.env*
