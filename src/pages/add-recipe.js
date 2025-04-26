@@ -1,6 +1,6 @@
 import React from "react";
 import AddRecipeForm from "../components/addRecipeForm";
-import Layout from "../components/Layout";
+import Layout from "../components/layout";
 
 const App = () => (
   <>

@@ -1,7 +1,7 @@
 //import React, { useEffect } from "react";
 import React, { useEffect, useRef } from "react";
 import "../styles/mealPlanner.scss";
-import Layout from "../components/Layout.js";
+import Layout from "../components/layout.js";
 
 const daysOfWeek = [
   "Sunday",

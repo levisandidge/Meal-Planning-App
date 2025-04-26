@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAuth0 } from "@auth0/auth0-react";
-import "./AddRecipeForm.css";
+import "./addRecipeForm.css";
 
 export default function AddRecipeForm() {
   const {
@@ -22,15 +22,15 @@ export default function AddRecipeForm() {
   } = useAuth0();
 
   // state for loading and feedback
-  const[isSubmitting, setIsSubmitting] = useState(false);
-  const[submitStatus, setSubmitStatus] = useState({ message: '', type: '' }); // type: success or error
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState({ message: "", type: "" }); // type: success or error
 
   // REMOVED OLD WATCHED VALUES, NOT NEEDED ANYMORE
 
   const onSubmit = async (data) => {
     // set submitting state
     setIsSubmitting(true);
-    setSubmitStatus({ message: '', type: '' }); // clear previous status
+    setSubmitStatus({ message: "", type: "" }); // clear previous status
 
     // Check if user is authenticated
     if (!isAuthenticated) {
@@ -48,37 +48,44 @@ export default function AddRecipeForm() {
 
       // UTILIZE FormData INSTEAD OF JSON
       const formData = new FormData();
-      formData.append('name', data.recipeName);
-      formData.append('ingredients', data.ingredients);
-      formData.append('instructions', data.instructions);
-      formData.append('source', data.author);
+      formData.append("name", data.recipeName);
+      formData.append("ingredients", data.ingredients);
+      formData.append("instructions", data.instructions);
+      formData.append("source", data.author);
 
       if (data.picture && data.picture.length > 0) {
-        formData.append('picture', data.picture[0]); // Assuming picture is a file input
-
+        formData.append("picture", data.picture[0]); // Assuming picture is a file input
       }
       // REPLACED OLD FETCH CALL WITH BACKEND API (add-user-recipe.js)
-      const response = await fetch('/api/add-user-recipe', {
+      const response = await fetch("/api/add-user-recipe", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
         body: formData, // SENDING FORMDATA INSTEAD OF JSON
       });
-      
+
       const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(result.error || 'Failed to add recipe (${response.status})');
+        throw new Error(
+          result.error || "Failed to add recipe (${response.status})",
+        );
       }
 
       // SUCCESS
-      console.log('Recipe added via API:', result);
-      setSubmitStatus({ message: 'Recipe added successfully!', type: 'success' });
+      console.log("Recipe added via API:", result);
+      setSubmitStatus({
+        message: "Recipe added successfully!",
+        type: "success",
+      });
       reset(); // reset form fields
     } catch (error) {
-      console.error('Error adding recipe:', error);
-      setSubmitStatus({ message: 'Failed to add recipe. Please try again.', type: 'error' });
+      console.error("Error adding recipe:", error);
+      setSubmitStatus({
+        message: "Failed to add recipe. Please try again.",
+        type: "error",
+      });
     } finally {
       setIsSubmitting(false); // renable button
     }
@@ -147,7 +154,7 @@ export default function AddRecipeForm() {
 
       <div className="form-group">
         <button
-          type = "submit"
+          type="submit"
           className="form-button"
           disabled={isAuthLoading || isSubmitting} // disable button while loading or submitting
         >
@@ -157,14 +164,22 @@ export default function AddRecipeForm() {
 
       {/* Display feedback message */}
       {submitStatus.message && (
-        <p className={'feedback-message ${submitStatus.type}'}>
+        <p className={"feedback-message ${submitStatus.type}"}>
           {submitStatus.message}
         </p>
       )}
       {/* Display Auth0 login prompt if not authenticated */}
       {!isAuthLoading && !isAuthenticated && (
         <p className="login-prompt">
-          Please <button type="button" onClick={() => loginWithRedirect()} className="link-button">log in</button> to add a recipe.
+          Please{" "}
+          <button
+            type="button"
+            onClick={() => loginWithRedirect()}
+            className="link-button"
+          >
+            log in
+          </button>{" "}
+          to add a recipe.
         </p>
       )}
     </form>
