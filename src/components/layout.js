@@ -3,6 +3,8 @@ import Header from "./header";
 import Footer from "./footer";
 import "./layout.css";
 import { Link } from "gatsby";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const Layout = ({ children }) => {
   return (
